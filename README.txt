@@ -1,5 +1,6 @@
 NUS dataset I & II 
 https://www.ece.nus.edu.sg/stfpage/elepv/NUS-HandSet/
+
 - 2000+ Static hand images (low res of 160 x 120) of large background variety
 - 750+ hand images with people in background
 - easier to do
