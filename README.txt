@@ -5,5 +5,5 @@ https://www.ece.nus.edu.sg/stfpage/elepv/NUS-HandSet/
 
 IPN dataset 
 - large gesture (series of motion images) dataset for interactive applications
-https://gibranbenitez.github.io/IPN_Hand/
-
+Homepage: https://gibranbenitez.github.io/IPN_Hand/
+Paper: https://gibranbenitez.github.io/2021_ICPR_IpnHand.pdf
