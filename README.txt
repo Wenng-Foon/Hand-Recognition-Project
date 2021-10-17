@@ -30,4 +30,4 @@ Extension: (Multiframe recognition)
 Implementation details:
 When the detector detects a hand for a certain number of times in a time period of video capture, it will turn on the recognition model.
 
-*Feel free to start the coding, we can share later via google drive or if you want, drop me your email for your github account and i will give you access to upload code here.
+*Feel free to start the coding, we can share later via google drive! Also drop me your email for your github account so i can give you access to upload code here.
