@@ -3,7 +3,7 @@ NUS dataset I & II
 https://www.ece.nus.edu.sg/stfpage/elepv/NUS-HandSet/
 - easier to do
 - test out resnet50
-- train a detector with the 2000 empty background dataset
+- train a detector(using resnet10) with the 2000 empty background dataset
 
 
 
