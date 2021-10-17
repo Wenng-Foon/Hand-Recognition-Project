@@ -14,13 +14,13 @@ Paper: https://gibranbenitez.github.io/2021_ICPR_IpnHand.pdf
 - more difficult as large data and model
 
 
-TASKS TO DO:
+TASKS TO DO: (Single frame recognition)
 1. Perform data augmentation via dataloader transforms (rotation, scale, horizontal flip, translation)
 2. Make a simple detector with resnet10, fc layer maps to 2 classes: hand present or not present
 3. Make a complex recognition model with resnet50 and other architectures to perform hand recognition 
 
 
-Extension:
+Extension: (Multiframe recognition) 
 1. Preprocess IPN dataset into categories of frames of the 11 classes (including no hand)
 2. Convert all image into greyscale, stack 5 of the same images together to create a 5 channel input
 3. Put these 5 channel input through a ResNext101 (bottleneck resnet) and train with label supervision
