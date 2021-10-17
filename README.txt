@@ -26,3 +26,6 @@ Extension: (Multiframe recognition)
 3. Put these 5 channel input through a ResNext101 (bottleneck resnet) and train with label supervision
 4. Perform predictiong and evaluate test accuracy 
 
+Implementation details:
+When the detector detects a hand for a certain number of times in a time period of video capture, it will turn on the recognition model.
+
