@@ -1,11 +1,11 @@
 NUS dataset I & II 
 https://www.ece.nus.edu.sg/stfpage/elepv/NUS-HandSet/
-
-- 2000+ Static hand images (low res of 160 x 120) of large background variety
-- 750+ hand images with people in background
-- easier to do
-- test out resnet50
+- 2000 Static hand images (low res of 160 x 120) of large background variety
+- 2000 empty background images
+- 750 hand images with people in background
+- easier to do (only 100MB total)
 - train a detector(using resnet10) with the 2000 empty background dataset
+- test out resnet50 for recognition
 
 
 IPN dataset 
