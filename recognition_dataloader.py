@@ -48,6 +48,7 @@ class RecognitionImageFolder(data.Dataset):
         self.transform = transform  #Define the type of image conversion
         self.image = []     #define the list to store images
         self.img_dir = join(root, subdir)
+        print(len(os.listdir(self.img_dir)))
         self.label_dict = {'a':0, 'b':1, 'c':2, 'd':3, 'e':4, 'f':5, 'g':6, 'h':7, 'i':8, 'j':9}
         
     def __len__(self):

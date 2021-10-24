@@ -14,8 +14,8 @@ print(device)
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-id", "--exp_id", type=str, default='res_0')
-    parser.add_argument("-m", "--mode", choices=["resnet", "se", "cbam" ], default="none", help="To train a normal resnet or with SE/CBAM")
+    parser.add_argument("-id", "--exp_id", type=str, default='res0')
+    parser.add_argument("-m", "--mode", choices=["normal", "se", "cbam" ], default="normal", help="To train a normal resnet or with SE/CBAM")
     parser.add_argument("-b","--batch_size", type=int, default=16, help='number of training epochs')
     parser.add_argument("-e","--epochs", type=int, default=50, help='number of training epochs')
     parser.add_argument("-lr", "--learning_rate", type=float, default=1e-3, help='learning rate')
@@ -49,7 +49,9 @@ if __name__ == '__main__':
                              std=[0.229, 0.224, 0.225])
     ])
 
+
     trainvalset = RecognitionImageFolder(root='./NUS', subdir='RecognitionData', transform=transform)
+
     trainset, testset = torch.utils.data.random_split(trainvalset, [2250, 500])
 
     trainloader = DataLoader(trainset, batch_size=args.batch_size,
