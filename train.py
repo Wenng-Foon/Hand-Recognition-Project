@@ -28,7 +28,7 @@ def train(args, model, optimizer, dataloaders):
             loss.backward()
             optimizer.step()
 
-            if i % 100 == 0 and i != 0:
+            if i % 50 == 0 and i != 0:
                 print('epoch:{}, iter:{}, time:{:.2f}, loss:{:.5f}'.format(epoch, i,
                     time.time()-iter_time, loss.item()))
                 iter_time = time.time()
@@ -45,8 +45,10 @@ def train(args, model, optimizer, dataloaders):
                 ### save the model and the optimizer --------------------------------
                 #
                 torch.save({'epoch': epoch,
+                            'accuracy' : testing_accuracy,
+                            'loss' : loss.item(),
                             'model_state_dict': model.state_dict(),
-                            'optimizer_state_dict': optimizer.state_dict(),
+                            'optimizer_state_dict': optimizer.state_dict()
                             }, './{}_{}_checkpoint.pth'.format(args.exp_id, args.mode))
                             
                 best_testing_accuracy = testing_accuracy
@@ -84,7 +86,10 @@ def resume(args, model, optimizer):
     model.load_state_dict(checkpoint['model_state_dict'])
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     epoch = checkpoint['epoch']
-    print("resuming from epoch {}".format(epoch))
+    testing_accuracy = checkpoint['accuracy']
+    loss = checkpoint['loss']
+
+    print("resuming from epoch {}, testing_accuracy: {}, loss: {} ".format(epoch, testing_accuracy, loss))
     
     model.to(device)
     ### -----------------------------------------------------------------

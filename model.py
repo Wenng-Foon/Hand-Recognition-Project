@@ -11,10 +11,10 @@ class SEModule(nn.Module):
         self.pool_type = pool_type
         
         if self.pool_type == "both":
-            self.maxpool = nn.AdaptiveMaxPool2d(1)
+            self.max_pool = nn.AdaptiveMaxPool2d(1)
             self.avg_pool = nn.AdaptiveAvgPool2d(1)
         elif self.pool_type ==  "max":
-            self.maxpool = nn.AdaptiveMaxPool2d(1)
+            self.max_pool = nn.AdaptiveMaxPool2d(1)
         else:
             self.avg_pool = nn.AdaptiveAvgPool2d(1)
         
@@ -30,7 +30,7 @@ class SEModule(nn.Module):
     def forward(self, x):
         batch_size, num_channels, _, _ = x.size()
         
-        if self.pool == "both":
+        if self.pool_type == "both":
             se1 = self.avg_pool(x)
             se1 = torch.flatten(se1,1)
             se1 = self.se_bottleneck(se1)
@@ -41,7 +41,7 @@ class SEModule(nn.Module):
             
             se = se1+se2
             
-        elif self.pool == "max":
+        elif self.pool_type == "max":
             
             se = self.max_pool(x)
             se = torch.flatten(se,1)
@@ -133,6 +133,7 @@ class Attention_Bottleneck(nn.Module):
         self.bn3 = bottleneck_layer.bn3
         self.relu = bottleneck_layer.relu
         self.attention = ChannelSpatialAttention(self.bn3.num_features, reduction_ratio, pool_type=pool_type, use_Spatial=use_Spatial)
+        self.downsample = None
         if bottleneck_layer.downsample:
             self.downsample = bottleneck_layer.downsample
     

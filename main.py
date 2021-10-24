@@ -69,9 +69,9 @@ if __name__ == '__main__':
         pretrained = True
 
     if args.mode == "cbam":
-        model = Attention_ResNet50(pretrained=pretrained, reduction_ratio=args.reduction_ratio, pool_type=args.pool_type, use_Spatial= True).to(device)
+        model = Attention_ResNet50(pretrained=pretrained, reduction_ratio=args.reduction_ratio, pool_type=args.pooling, use_Spatial= True).to(device)
     elif args.mode == "se":
-        model = Attention_ResNet50(pretrained=pretrained, reduction_ratio=args.reduction_ratio, pool_type=args.pool_type, use_Spatial= False).to(device)
+        model = Attention_ResNet50(pretrained=pretrained, reduction_ratio=args.reduction_ratio, pool_type=args.pooling, use_Spatial= False).to(device)
     else:
         model = models.resnet50(pretrained=pretrained)
         model.fc = nn.Linear(2048,10)
