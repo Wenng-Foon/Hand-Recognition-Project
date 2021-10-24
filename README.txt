@@ -1,3 +1,5 @@
+Models here >>>> https://drive.google.com/drive/folders/15joPuK8I8y_68T6JQEKLQHk98vdCHMGX?usp=sharing
+
 NUS dataset I & II 
 https://www.ece.nus.edu.sg/stfpage/elepv/NUS-HandSet/
 - 2000 Static hand images (low res of 160 x 120) of large background variety
