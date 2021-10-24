@@ -38,9 +38,16 @@ if __name__ == '__main__':
     torch.cuda.manual_seed(args.seed)
 
     # dataloaders
-    transform = transforms.Compose([transforms.ToTensor(),
-     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-
+    transform = transforms.Compose([
+        transforms.RandomHorizontalFlip(),
+        transforms.RandomResizedCrop(32),
+        transforms.RandomRotation(20),
+        transforms.Resize((180, 160)),
+        transforms.RandomAffine(20, translate=(0.2, 0.2)),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                             std=[0.229, 0.224, 0.225])
+    ])
 
     trainvalset = RecognitionImageFolder(root='./NUS', subdir='RecognitionData', transform=transform)
     trainset, testset = torch.utils.data.random_split(trainvalset, [2250, 500])
