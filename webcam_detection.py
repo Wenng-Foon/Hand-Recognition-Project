@@ -11,6 +11,7 @@ import torch.nn.functional as F
 import torchvision.transforms as transforms
 import torch.optim as optim
 from modelresnet10 import resnet10, CBAM_resnet10
+from PIL import Image
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -20,7 +21,7 @@ assert os.path.exists(checkpoint_path), ('checkpoint do not exits for %s' % chec
 checkpoint = torch.load(checkpoint_path)
 model.load_state_dict(checkpoint['model_state_dict'])
 model = model.to(device)
-
+"""
 transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.5, 0.5, 0.5],
@@ -28,6 +29,17 @@ transform = transforms.Compose([
     #transforms.Normalize(mean=[0.485, 0.456, 0.406],
     #                     std=[0.229, 0.224, 0.225])
 ])
+"""
+transform = transforms.Compose([
+    transforms.Resize((180, 160)),
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomRotation(20),
+    transforms.RandomAffine(20, translate=(0.2, 0.2)),
+    transforms.ToTensor(),
+    #transforms.Normalize(mean=[0.485, 0.456, 0.406],
+    #                     std=[0.229, 0.224, 0.225])
+])
+
 
 font                   = cv2.FONT_HERSHEY_SIMPLEX
 top                    = (20,20)
@@ -35,6 +47,8 @@ bottomLeft             = (400,400)
 fontScale              = 1
 fontColor              = (255,255,255)
 lineType               = 2
+
+
 prev_frame_time = time.time()
 with torch.no_grad():
 
@@ -45,14 +59,19 @@ with torch.no_grad():
         ret, frame = cap.read()
         
         #img = frame
-        img = cv2.resize(frame, (180,160))
-        img = transform(img)
-        img = img.to(device)
-        img = img.unsqueeze(0)
+        img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        imgPIL = Image.fromarray(img)
         
-        # Make detections 
-        results = model(img)
-        score = results.item()
+        score = 0
+        for i in range(5):
+            img = transform(imgPIL)
+            img = img.to(device)
+            img = img.unsqueeze(0)
+            
+            # Make detections 
+            results = model(img)
+            score += results.item()
+        score /= 5
         
         # FPS calc
         new_frame_time = time.time()
